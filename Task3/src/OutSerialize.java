@@ -1,5 +1,5 @@
-import com.epam.catalog.bean.Category;
-import com.epam.catalog.bean.News;
+import com.epam.catalog.bean.Book;
+import com.epam.catalog.bean.Unit;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,15 +13,14 @@ import java.util.List;
  */
 public class OutSerialize {
  
-	public static void main(String args[]) throws IOException {
-		 List<News> news=new ArrayList<>();
-		News rc1 = new News(1, Category.BOOK, "New book", "Today sale the next book of hary Potter is conducted");
-		News rc2 = new News(2, Category.DISK, "New disk", "Today sale the next series of Sherlock is cogfhjghj");
-		News rc3=new News(3,Category.DISK,"New Disk,","tfVVCGHHGvvbvcXvdvdsfsdfsfsdfsdfsd"); 
-		news.add(rc1);
-		news.add(rc2);
-		news.add(rc3);
-		
+	public static void outsaerialise(String args[]) throws IOException {
+		 List<Book> books=new ArrayList<>();
+		Book rc1 = new Book("New book", "Today sale the next book",200,13.4);
+		Book rc2 = new Book( "New film", "Today sale the next serie",300,17.6);
+
+		books.add(rc1);
+		books.add(rc2);
+
 		// создание цепи потоков с потоком
 		// вывода объекта в конце
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objects.dat"));
@@ -29,21 +28,18 @@ public class OutSerialize {
 		
 		// java.util.* был импортирован для
 		// использования класса Date
-		for(News oneNews:news){
-			out.writeObject(oneNews);
+		for(Book oneBook:books){
+			out.writeObject(oneBook);
 		}
-	//	out.writeObject(now);
-	//	out.writeObject(rc1);
-	//	out.writeObject(rc2);
-	//	out.writeObject(rc3);
+
 		out.flush();
 		out.close();
 		System.out.println("I have written:");
 		System.out.println("A Date object: " + now);
-		System.out.println("Two com.epam.catalog.bean.News objects");
+		System.out.println("Two com.epam.catalog.bean.Book objects");
 		System.out.println(rc1);
 		System.out.println(rc2);
-		System.out.println(rc3);
+
 	}
 
 }

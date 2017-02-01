@@ -7,13 +7,14 @@ import java.util.Date;
  * Created by Uladzislau_Palupan on 1/30/2017.
  */
 public class InSerialize {
-    public static void main (String args[]) throws IOException, ClassNotFoundException {
+    public static void inserialise (String args[]) throws IOException, ClassNotFoundException {
         ObjectInputStream in =  new ObjectInputStream(new FileInputStream("objects.dat"));
-        Date d1 = (Date)in.readObject();
+       // Date d1 = (Date)in.readObject();
+       //srgergsdgergergergerghwerh
         RandomClass rc1 = (RandomClass)in.readObject();
         RandomClass rc2 = (RandomClass)in.readObject();
         System.out.println("I have read:");
-        System.out.println("A Date object: "+d1);
+       // System.out.println("A Date object: "+d1);
         System.out.println("Two Group of randoms");
         rc1.printout();
         rc2.printout();
