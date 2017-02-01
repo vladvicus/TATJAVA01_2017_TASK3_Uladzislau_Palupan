@@ -1,0 +1,7 @@
+b,Beth Lewis,The Wolf Road,200,15.91
+b,Noah Hawley,Before the Fall,150,18.2
+b,Colson Whitehead,The Underground Railroad ,190,16.7
+b,J.K. Rowling,Harry Potter and the Cursed Child,300,14.99
+b,J.R.R. Tolkien,The Hobbit and the Lord of the Rings,500,22,62
+b,J.R.R. Tolkien,The Silmarillion,250,11.55
+
