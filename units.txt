@@ -9,6 +9,6 @@ d,DVD,Rupture(film),2017,4
 b,Noah Tolkien,The Hobbit and the Lord of the Rings,500,22,62
 b,J.R.R. Tolkien,The Silmarillion,250,11.55
 f,Avatar,2009,FANTASY,USA,140
-b,Tolkien,Hobbit,200,15.8
-b,Tolkien,Hobbit,200,15.8
-b,Tolkien,Hobbit,200,15.8
+
+
+

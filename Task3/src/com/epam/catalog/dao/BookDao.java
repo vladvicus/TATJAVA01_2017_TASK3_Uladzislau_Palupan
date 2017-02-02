@@ -8,7 +8,7 @@ import java.util.List;
 /*
  */
 public interface BookDao {
-    void addBook(Book book) throws DaoException;
+    void addBook(String book) throws DaoException;
      Book findOneBook(Book name) throws DaoException;
     List<Book> findBooksByPrice(Book price) throws DaoException;
     List<Book> findBooksByAuthor(String author) throws DaoException;

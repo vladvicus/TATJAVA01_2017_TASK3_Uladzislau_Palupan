@@ -1,7 +1,11 @@
 package com.epam.catalog.dao.factory;
 
 import com.epam.catalog.dao.BookDao;
+import com.epam.catalog.dao.DiskDao;
+import com.epam.catalog.dao.FilmDao;
 import com.epam.catalog.dao.impl.BookDaoImpl;
+import com.epam.catalog.dao.impl.DiskDaoImpl;
+import com.epam.catalog.dao.impl.FilmDaoImpl;
 
 /**
  * Created by Uladzislau_Palupan on 1/30/2017.
@@ -9,6 +13,9 @@ import com.epam.catalog.dao.impl.BookDaoImpl;
 public final class DaoFactory {
     private static final DaoFactory instance = new DaoFactory();
     private final BookDao bookDao = new BookDaoImpl();
+    private final FilmDao filmDao = new FilmDaoImpl();
+    private final DiskDao diskDao = new DiskDaoImpl();
+
 
     private DaoFactory(){}
 
@@ -22,5 +29,13 @@ public final class DaoFactory {
     {
         return bookDao;
 
+    }
+
+    public FilmDao getFilmDao() {
+        return filmDao;
+    }
+
+    public DiskDao getDiskDao() {
+        return diskDao;
     }
 }

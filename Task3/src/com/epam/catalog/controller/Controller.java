@@ -6,7 +6,7 @@ import com.epam.catalog.controller.command.Command;
 public class Controller {
 
 	private final CommandProvider provider = new CommandProvider();
-	private final char paramDelimeter = ' ';
+	private final char paramDelimeter = ',';
 	
 	public String executeTask(String request){
 		
@@ -15,6 +15,7 @@ public class Controller {
 	Command executionCommand = provider.getCommand(commandName);
 
 	System.out.println("Controller:"+executionCommand.toString());
+
 	String response = executionCommand.execute(request);
 	
 	return response;

@@ -4,10 +4,7 @@ import com.epam.catalog.bean.Book;
 import com.epam.catalog.dao.BookDao;
 import com.epam.catalog.dao.exception.DaoException;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,27 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public void addBook(Book book) throws DaoException {
+    public void addBook(String book) throws DaoException {
+        System.out.println("Write to file"+book);
+        writeToFile(book);
+
+    }
+
+    private void writeToFile(String book) {
+
+
+        FileWriter wr = null;
+        try {
+            wr = new FileWriter(datafile,true);
+            wr.append("\n"+book);
+            wr.flush();
+            wr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
 
     }
 
@@ -46,35 +63,37 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> findBooksByAuthor(String author) throws DaoException {
-        System.out.println("AUTHOR-->"+author);
-   List<Book> booksFoundByAuthorName=new ArrayList<>();
+        System.out.println("AUTHOR-->" + author);
+        List<Book> booksFoundByAuthorName = new ArrayList<>();
         System.out.println("method findBooks in BookDaoImpl ");
         try {
             readFile(datafile);
 
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
             // throw new DaoException(e);
         }
-        for(Book oneBook:books){
-            if(oneBook.getAuthor().equalsIgnoreCase(author)||(oneBook.getAuthor().contains(author))){
+        for (Book oneBook : books) {
+            if (oneBook.getAuthor().equalsIgnoreCase(author) || (oneBook.getAuthor().contains(author))) {
                 booksFoundByAuthorName.add(oneBook);
-            }else {
-                System.out.println(oneBook.getAuthor()+"  not coincide with  "+author);
+            } else {
+                System.out.println(oneBook.getAuthor() + "  not coincide with  " + author);
             }
         }
-        System.out.println("The list of books with author:"+author);
-        showCollection(booksFoundByAuthorName);
+        System.out.println("The list of books with author:" + author);
+        //showCollection(booksFoundByAuthorName);
 
-        return null;
+        return booksFoundByAuthorName;
     }
 
-    private void showCollection(List<Book> bookList){
-        for (Book oneBook:bookList) {
+    private void showCollection(List<Book> bookList) {
+        for (Book oneBook : bookList) {
             System.out.println(oneBook);
         }
     }
-    private  List<Book> readFile(String fname) throws IOException {
+
+
+    private List<Book> readFile(String fname) throws IOException {
 
 
         FileInputStream fis = new FileInputStream(fname);
@@ -87,16 +106,16 @@ public class BookDaoImpl implements BookDao {
 
 
             }
-            if (!data[0].startsWith("b")) {
-                break;
-            }
-            String name = data[1];
-            String author = data[2];
-            Integer page = Integer.parseInt(data[3]);
-            Double price = Double.parseDouble(data[4]);
+            if (data[0].startsWith("b")) {
+                System.out.println("Your prefix " + data[0]);
+                String name = data[1];
+                String author = data[2];
+                Integer page = Integer.parseInt(data[3]);
+                Double price = Double.parseDouble(data[4]);
+                books.add(new Book(name, author, page, price));
 
+            } else continue;
 
-            books.add(new Book(name, author, page, price));
 
         }
         br.close();

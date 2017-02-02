@@ -1,5 +1,4 @@
 import com.epam.catalog.bean.Book;
-import com.epam.catalog.bean.Unit;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

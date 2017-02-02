@@ -6,28 +6,36 @@ import com.epam.catalog.dao.exception.DaoException;
 import com.epam.catalog.dao.factory.DaoFactory;
 import com.epam.catalog.service.BookService;
 import com.epam.catalog.service.exception.ServiceException;
-
 import java.util.List;
 
-/**
- * Created by Uladzislau_Palupan on 1/30/2017.
- */
 public class BookServiceImpl implements BookService {
 
 
     @Override
-    public void addBook(Book book) throws ServiceException {
+    public void addBook(String book) throws ServiceException {
+        System.out.println("method findBooksByAuthor BookServiceImpl");
+        String response =null;
+        try {
+            DaoFactory serviceFactory = DaoFactory.getInstance();
+            BookDao bookDao = serviceFactory.getBookDao();
 
+            bookDao.addBook(book);
+            response = "Welcome by BookServiceImpl";
+
+        } catch (DaoException e) {
+            response = "Error during searching procedure from BookServiceImpl";
+            throw new ServiceException(e);
+
+            // write log
+        }
     }
-
-    @Override
-    public Book findOneBook(Book name) throws ServiceException {
+   @Override
+    public Book findOneBook(String name) throws ServiceException {
         return null;
     }
 
     @Override
-    public List<Book> findBooksByPrice(Book price) throws ServiceException {
-
+    public List<Book> findBooksLessThenPrice(Double price) throws ServiceException {
         return null;
     }
 
@@ -41,19 +49,17 @@ public class BookServiceImpl implements BookService {
             DaoFactory serviceFactory = DaoFactory.getInstance();
             BookDao bookDao = serviceFactory.getBookDao();
 
-            bookDao.findBooksByAuthor(author);
+            List<Book> booksFind=bookDao.findBooksByAuthor(author);
             response = "Welcome by BookServiceImpl";
+            return booksFind;
         } catch (DaoException e) {
             response = "Error during searching procedure from BookServiceImpl";
             throw new ServiceException(e);
 
             // write log
-
-        } finally {
-            System.out.println("In service:" + response);
         }
 
-        return null;
+
 
     }
 }

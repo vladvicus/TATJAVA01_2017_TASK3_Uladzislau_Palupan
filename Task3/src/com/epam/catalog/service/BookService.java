@@ -5,17 +5,17 @@ import com.epam.catalog.service.exception.ServiceException;
 
 import java.util.List;
 
-/**
- *
- */
+
 public interface BookService {
 
 
-    void addBook(Book book) throws ServiceException;
+    void addBook(String book) throws ServiceException;
 
-    Book findOneBook(Book name) throws ServiceException;
 
-    List<Book> findBooksByPrice(Book price) throws ServiceException;
+
+    Book findOneBook(String name) throws ServiceException;
+
+    List<Book> findBooksLessThenPrice(Double price) throws ServiceException;
 
     List<Book> findBooksByAuthor(String author) throws ServiceException;
 }
