@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface BookDao {
     void addBook(String book) throws DaoException;
-     Book findOneBook(Book name) throws DaoException;
-    List<Book> findBooksByPrice(Book price) throws DaoException;
+   //  Book findOneBook(Book name) throws DaoException;
+  //  List<Book> findBooksByPrice(Book price) throws DaoException;
+    List<Book> findBooksLessThenPrice(Double price) throws DaoException;
     List<Book> findBooksByAuthor(String author) throws DaoException;
+    
 }

@@ -7,27 +7,29 @@ import com.epam.catalog.dao.exception.DaoException;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
-/**
- * Created by Uladzislau_Palupan on 1/30/2017.
- */
+
+
 public class BookDaoImpl implements BookDao {
-    private List<Book> books = new ArrayList<>();
+  //  private List<Book> books = new ArrayList<>();
+    private Set<Book> books=new HashSet<>();
     String datafile = Paths.get("Task3/data/units.txt").toAbsolutePath().toString();
-
+/*
     public List<Book> getBooks() {
         return books;
     }
 
     public void setBooks(List<Book> books) {
         this.books = books;
-    }
+    }*/
 
     @Override
     public void addBook(String book) throws DaoException {
-        System.out.println("Write to file"+book);
+        System.out.println("Write to file  "+book);
         writeToFile(book);
 
     }
@@ -50,16 +52,6 @@ public class BookDaoImpl implements BookDao {
 
     }
 
-    @Override
-    public Book findOneBook(Book name) throws DaoException {
-
-        return null;
-    }
-
-    @Override
-    public List<Book> findBooksByPrice(Book price) throws DaoException {
-        return null;
-    }
 
     @Override
     public List<Book> findBooksByAuthor(String author) throws DaoException {
@@ -86,14 +78,10 @@ public class BookDaoImpl implements BookDao {
         return booksFoundByAuthorName;
     }
 
-    private void showCollection(List<Book> bookList) {
-        for (Book oneBook : bookList) {
-            System.out.println(oneBook);
-        }
-    }
+  
 
 
-    private List<Book> readFile(String fname) throws IOException {
+    private Set<Book> readFile(String fname) throws IOException {
 
 
         FileInputStream fis = new FileInputStream(fname);
@@ -107,7 +95,7 @@ public class BookDaoImpl implements BookDao {
 
             }
             if (data[0].startsWith("b")) {
-                System.out.println("Your prefix " + data[0]);
+               // System.out.println("Your prefix " + data[0]);
                 String name = data[1];
                 String author = data[2];
                 Integer page = Integer.parseInt(data[3]);
@@ -123,4 +111,38 @@ public class BookDaoImpl implements BookDao {
         System.out.println("Books are suscessfully loaded from file!");
         return books;
     }
+
+	@Override
+	public List<Book> findBooksLessThenPrice(Double price) throws DaoException {
+		  System.out.println("Price-->" +price);
+	        List<Book> booksFoundByPrice = new ArrayList<>();
+	        System.out.println("method findBooks in BookDaoImpl ");
+	        try {
+	            readFile(datafile);
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	           //  throw new DaoException("error in findBooksLessThenPrice method");
+	        }
+	        for (Book oneBook : books) {
+	            if (oneBook.getPrice()<(price)) {
+	                booksFoundByPrice.add(oneBook);
+	            } else {
+	                System.out.println(oneBook.getPrice()+ " >  " + price);
+	            }
+	        }
+	        System.out.println("The list of books with author:" + price);
+	      //  showCollection(booksFoundByPrice);
+
+	        return booksFoundByPrice;
+		
+	}
+
+	private void showCollection(List<Book> books) {
+		for(Book oneBook:books){
+			System.out.println(oneBook);
+		}
+		
+	}
+	
 }

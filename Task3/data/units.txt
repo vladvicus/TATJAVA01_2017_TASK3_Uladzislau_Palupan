@@ -12,3 +12,6 @@ f,Avatar,2009,FANTASY,USA,140
 b,Tolkien,Hobbit,200,15.8
 b,Tolkien,Hobbit,200,15.8
 b,Tolkien,Hobbit,200,15.8
+b,Tolkien,Hobbit,200,15.8
+b,Tolkien,Hobbit,200,17.8
+b,dfhgdf,dhdgsr,234,346.0

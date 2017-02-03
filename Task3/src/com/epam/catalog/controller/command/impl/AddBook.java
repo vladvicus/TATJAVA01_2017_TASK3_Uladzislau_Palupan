@@ -1,6 +1,7 @@
 package com.epam.catalog.controller.command.impl;
 
 
+import com.epam.catalog.bean.Book;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.BookService;
 import com.epam.catalog.service.exception.ServiceException;
@@ -10,17 +11,27 @@ public class AddBook implements Command {
 
     @Override
     public String execute(String request) {
-         final char paramDelimeter = ',';
+        final char paramDelimeter = ',';
         System.out.println(request);
 
         request = request.replaceAll("\\s{2,}", " ");
+        // String[] arr = request.split(",");
+        Book book = new Book();
+        Book newBook=book.makeBook();
 
 
-        String message = request.substring(request.indexOf(paramDelimeter));
-        message = "b" + message;
+
+        //String message = request.substring(request.indexOf(paramDelimeter));
+        StringBuffer sb=new StringBuffer();
+        sb.append(newBook.getName()+",");
+        sb.append(newBook.getAuthor()+",");
+        sb.append(newBook.getPages()+",");
+        sb.append(newBook.getPrice());
+
+       String message = "b," + sb.toString();
 
         /*String[] arr = request.split(",");
-		for (String element : arr) {
+        for (String element : arr) {
 			element.trim();
 			System.out.println(element);
 		}

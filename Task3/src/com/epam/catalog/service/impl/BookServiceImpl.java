@@ -20,25 +20,37 @@ public class BookServiceImpl implements BookService {
             BookDao bookDao = serviceFactory.getBookDao();
 
             bookDao.addBook(book);
-            response = "Welcome by BookServiceImpl";
+           
 
         } catch (DaoException e) {
             response = "Error during searching procedure from BookServiceImpl";
-            throw new ServiceException(e);
+            throw new ServiceException(response);
 
             // write log
         }
     }
-   @Override
+  /* @Override
     public Book findOneBook(String name) throws ServiceException {
         return null;
-    }
+    }*/
 
     @Override
     public List<Book> findBooksLessThenPrice(Double price) throws ServiceException {
-        return null;
-    }
+    	String response =null;
+    
+    	 try {
+             DaoFactory serviceFactory = DaoFactory.getInstance();
+             BookDao bookDao = serviceFactory.getBookDao();
 
+             List<Book> booksFind=bookDao.findBooksLessThenPrice(price);
+            
+             return booksFind;
+         } catch (DaoException e) {
+             response = "Error during searching procedure from BookServiceImpl";
+             throw new ServiceException(response);
+      
+    }
+    }
 
     @Override
     public List<Book> findBooksByAuthor(String author) throws ServiceException {
@@ -50,11 +62,11 @@ public class BookServiceImpl implements BookService {
             BookDao bookDao = serviceFactory.getBookDao();
 
             List<Book> booksFind=bookDao.findBooksByAuthor(author);
-            response = "Welcome by BookServiceImpl";
+           
             return booksFind;
         } catch (DaoException e) {
             response = "Error during searching procedure from BookServiceImpl";
-            throw new ServiceException(e);
+            throw new ServiceException(response);
 
             // write log
         }

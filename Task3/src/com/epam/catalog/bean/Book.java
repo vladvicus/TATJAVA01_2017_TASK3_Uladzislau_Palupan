@@ -1,13 +1,19 @@
 package com.epam.catalog.bean;
 
+import java.util.Scanner;
+
 /**
  * Created by Uladzislau_Palupan on 2/1/2017.
  */
-public class Book  {
+public class Book {
     private String author;
     private String name;
     private Integer pages;
     private Double price;
+
+    public Book() {
+
+    }
 
     public Book(String author, String name, Integer pages, Double price) {
         this.author = author;
@@ -48,6 +54,28 @@ public class Book  {
         this.price = price;
     }
 
+    public Book makeBook() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Input book's name");
+        if (in.hasNextLine()) {
+            this.name = in.nextLine();
+        }
+        System.out.println("Input book's author");
+        if (in.hasNextLine()) {
+            this.author = in.nextLine();
+        }
+
+        System.out.println("Input books' pages");
+        if (in.hasNextInt()) {
+            this.pages = in.nextInt();
+        }
+        System.out.println("Input books' pages");
+        if (in.hasNextDouble()) {
+            this.price = in.nextDouble();
+        }
+        return new Book(author, name, pages, price);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,7 +104,7 @@ public class Book  {
                 "author='" + author + '\'' +
                 ", name='" + name + '\'' +
                 ", pages=" + pages +
-                ", price=" + price +"$"+
+                ", price=" + price + "$" +
                 '}';
     }
 }
